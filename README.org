@@ -1,0 +1,9 @@
+* plist-mode
+
+  Old-Style NeXT/OpenStep ASCII Property Lists Mode for Emacs
+
+** Links
+
+   - [[https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/PropertyLists/OldStylePlists/OldStylePLists.html][Apple Old-Style Plist Documentation]]
+   - [[https://en.wikipedia.org/wiki/Property_list][Wikipedia Plist Page]]
+   - [[http://www.gnustep.org/resources/documentation/Developer/Base/Reference/NSPropertyList.html][GNUStep Plist Documentation]]
