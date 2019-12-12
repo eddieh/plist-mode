@@ -27,16 +27,13 @@
 
 (defvar plist-mode-syntax-table
   (let ((st (make-syntax-table)))
-    (modify-syntax-entry ?{ "(}" st)
-    (modify-syntax-entry ?} "){" st)
     (modify-syntax-entry ?/ ".  14" st)
     (modify-syntax-entry ?* ".  23" st)
     st)
   "Syntax table for `plist-mode'.")
 
 (defvar plist-mode-font-lock-defaults
-  `((
-     ("\"\\.\\*\\?" . font-lock-string-face))))
+  '(("yes\\|Yes\\|YES\\|no\\|No\\|NO" . font-lock-constant-face)))
 
 (defun plist-indent-line ()
   "Indent current line of Property List file."
@@ -57,7 +54,7 @@
 (define-derived-mode plist-mode prog-mode "Plist"
   "Major mode for editing Old-Style NeXT/OpenStep Property List files."
 
-  :syntax-table plist-mode-syntax-table
+  (set-syntax-table plist-mode-syntax-table)
 
   (setq-local comment-start "/*")
   (setq-local comment-start-skip "\\(//+\\|/\\*+\\)\\s *")
