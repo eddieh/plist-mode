@@ -2,7 +2,7 @@
 
 ;; Copyright (C) 2019 Eddie Hillenbrand
 
-;; Author: YourName
+;; Author: EddieHillenbrand
 ;; Keywords: extensions
 
 ;; This file is NOT part of GNU Emacs.
@@ -38,6 +38,21 @@
   `((
      ("\"\\.\\*\\?" . font-lock-string-face))))
 
+(defun plist-indent-line ()
+  "Indent current line of Property List file."
+  (interactive)
+  (let ((savep (> (current-column) (current-indentation)))
+	(indent (condition-case nil (max (plist-calculate-indentation) 0)
+		  (error 0))))
+    (if savep
+	(save-excursion (indent-line-to indent))
+      (indent-line-to indent))))
+
+(defun plist-calculate-indentation ()
+  "Return the column to which the current line should be indented."
+  (* tab-width (min (car (syntax-ppss (line-beginning-position)))
+		    (car (syntax-ppss (line-end-position))))))
+
 ;;;###autoload
 (define-derived-mode plist-mode prog-mode "Plist"
   "Major mode for editing Old-Style NeXT/OpenStep Property List files."
@@ -54,8 +69,7 @@
 
   (setq-local tab-width 4)
   (setq-local indent-tabs-mode nil)
-  ;; (setq-local indent-line-function 'plist--indent-line)
-  )
+  (setq-local indent-line-function 'plist-indent-line))
 
 (provide 'plist-mode)
 
